@@ -13,14 +13,28 @@ def count_characters(text):
 
     # Loop through each character in the text
     for char in text:
-        # If the character is already in the dictionary, increment its count
-        if char in char_count:
-            char_count[char] += 1
-        else:
-            # If it's the first occurrence, set its count to 1
-            char_count[char] = 1
+        if char.isalpha():  # Only count alphabetic characters
+            if char in char_count:
+                char_count[char] += 1
+            else:
+                char_count[char] = 1
 
     return char_count
+
+
+def print_report(word_count, char_count):
+    # Print the report
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{word_count} words found in the document\n")
+
+    # Sort the character counts by frequency in descending order
+    sorted_char_count = sorted(char_count.items(), key=lambda item: item[1], reverse=True)
+
+    # Print each character and its count
+    for char, count in sorted_char_count:
+        print(f"The '{char}' character was found {count} times")
+
+    print("--- End report ---")
 
 
 def main():
@@ -31,14 +45,12 @@ def main():
     with open(path_to_file, 'r') as f:
         file_contents = f.read()
 
-    # Count the words in the file and print the result
+    # Count the words and characters in the file
     word_count = count_words(file_contents)
-    print(f"The book contains {word_count} words.")
-
-    # Count the characters in the file and print the result
     char_count = count_characters(file_contents)
-    print("Character frequencies:")
-    print(char_count)
+
+    # Print the report
+    print_report(word_count, char_count)
 
 
 if __name__ == "__main__":
