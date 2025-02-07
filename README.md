@@ -1,6 +1,5 @@
 # Book Bot
 
-**Book Bot** is my first project!  
 This Python program analyzes an entire book and generates an interesting statistical report. 
 It includes features like word counts, unique words, character frequency, and more.
 
